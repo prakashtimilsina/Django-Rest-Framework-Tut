@@ -10,3 +10,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'price',
             'stock',
         )
+
+    def validate_price(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Price must be greater than zero.")
+        return value
